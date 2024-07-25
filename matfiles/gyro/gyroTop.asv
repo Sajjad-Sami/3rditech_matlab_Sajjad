@@ -1,0 +1,29 @@
+function [gyr_x, gyr_y, gyr_z] = gyroTop (fssel, rawGyr_x, rawGyr_y, rawGyr_z, gyrB_x,gyrB_y,gyrB_z)
+
+calib_samples = 1000;
+gyroScale_ = gyroScale(fssel);
+
+%--------------------x-axis--------------------------------
+gyr_x_i = gyr (rawGyr_x, gyroScale_, gyrB_x); 
+gyrB_x_calib = gyrB_calibrated (gyr_x_i , gyrB_x, calib_samples);
+%for x-axis gyroscope valuein dps
+gyr_x = gyr (rawGyr_x, gyroScale_, gyrB_x_calib);
+%------------------------------------------------------------
+
+%--------------------y-axis--------------------------------
+gyr_y_i = gyr (rawGyr_y, gyroScale_, gyrB_y); 
+gyrB_y_calib = gyrB_calibrated (gyr_y_i , gyrB_y, calib_samples);
+%for y-axis gyroscope valuein dps
+gyr_y = gyr (rawGyr_y, gyroScale_, gyrB_y_calib);
+%------------------------------------------------------------
+
+%--------------------z-axis--------------------------------
+gyr_z_i = gyr (rawGyr_z, gyroScale_, gyrB_z); 
+gyrB_z_calib = gyrB_calibrated (gyr_z_i , gyrB_z, calib_samples);
+%for z-axis gyroscope valuein dps
+gyr_z = gyr (rawGyr_z, gyroScale_, gyrB_z_calib);
+
+
+
+end
+
